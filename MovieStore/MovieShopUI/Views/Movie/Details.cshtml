@@ -1,0 +1,66 @@
+﻿@model MovieShopDAL.Movie
+
+@{
+    ViewBag.Title = "Read";
+}
+
+<h2>Read</h2>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrailerURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrailerURL)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Genres)
+        </dt>
+        @foreach(MovieShopDAL.Genres genre in Model.Genres)
+        {
+            <dd>
+                @genre.Genre
+            </dd>
+        }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MovieId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

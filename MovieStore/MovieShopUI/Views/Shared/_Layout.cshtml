@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MovieStore</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("MovieStore", "FrontPage", "Movie", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Movie", "Index", "Movie")</li>
+                    <li>@Html.ActionLink("Genre", "Index", "Genres")</li>
+                    <li>@Html.ActionLink("Order", "Index", "Order")</li>
+                    <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @{ 
+                        int CartCount = 0;
+                        List<MovieShopDAL.ShoppingCartItem> Cart = new List<MovieShopDAL.ShoppingCartItem>();
+                        if(Session["Cart"] != null)
+                        {
+                            Cart = (List< MovieShopDAL.ShoppingCartItem>)Session["Cart"];
+                            foreach (MovieShopDAL.ShoppingCartItem item in Cart)
+                            {
+                                CartCount += item.Quantity;
+                            }
+                        }
+                    }
+                    <li>
+                    <a href="@Url.Action("Index", "Cart")">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> Indkøbskurv 
+                        @if (CartCount != 0)
+                        {
+                            <span class="badge"> @CartCount</span>
+                        }
+                        </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - MovieStore</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
